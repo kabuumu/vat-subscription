@@ -18,7 +18,7 @@ package uk.gov.hmrc.vatsubscription.controllers
 
 import assets.TestUtil
 import play.api.libs.json.Json
-import uk.gov.hmrc.vatsubscription.helpers.PPOBTestConstants.{ppobPostExample, ppobPostExampleJson}
+import uk.gov.hmrc.vatsubscription.helpers.PPOBTestConstants.{ppobPostExample, ppobPostExampleReadsJson}
 import uk.gov.hmrc.vatsubscription.models.User
 import uk.gov.hmrc.vatsubscription.models.post.PPOBPost
 import uk.gov.hmrc.vatsubscription.models.updateVatSubscription.response.ErrorModel
@@ -34,7 +34,7 @@ class MicroserviceBaseControllerSpec extends TestUtil {
 
       "return a corresponding model given matching Json in the body" in {
 
-        val goodUser = User("123", None, "")(fakeRequest.withJsonBody(ppobPostExampleJson))
+        val goodUser = User("123", None, "")(fakeRequest.withJsonBody(ppobPostExampleReadsJson))
 
         val res = await(TestMicroserviceBaseController.parseJsonBody[PPOBPost](goodUser, Json.format[PPOBPost]))
         res shouldBe Right(ppobPostExample)
